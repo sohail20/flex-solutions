@@ -16,7 +16,7 @@ function OurTeam(props) {
             <Row>
 
               {
-                data.map((val)=>(
+               data && data.map((val)=>(
 
                 <Col md="4" key={val.id}>
                   <div className="team-player">

@@ -16,6 +16,7 @@ import {
   Nav,
   Container,
   UncontrolledTooltip,
+  ButtonGroup,
 } from "reactstrap";
 import { TitleName } from "Theme/theme";
 
@@ -119,16 +120,39 @@ function IndexNavbar() {
             navbar
           >
             <Nav navbar>
-              <NavItem>
-                <NavLink
-                  to="/Specialities-page"
-                  tag={Link}
-                >
-                  <p>Banquets</p>
-                </NavLink>
-              </NavItem>
+              <UncontrolledDropdown>
+                <ButtonGroup>
+                  <NavLink to="/Specialities-page" tag={Link} style={{background:"transparent"}} >
+                    Banquets
+                  </NavLink>
+                  <DropdownToggle
+                    aria-expanded={false}
+                    aria-haspopup={true}
+                    caret
+                    className="dropdown-toggle-split"
+                    color="primary"
+                    data-toggle="dropdown"
+                    type="button"
+                    style={{background:"transparent", marginTop:-1}}
+                  >
+                    <span className="sr-only">Toggle Dropdown</span>
+                  </DropdownToggle>
+                </ButtonGroup>
+                <DropdownMenu>
+                  <NavLink to="/halls-page" tag={Link} style={{color:"#333333"}}>
+                    Halls
+                  </NavLink>
+                  <NavLink to="/lawns-page" tag={Link} style={{color:"#333333"}}>
+                   Lawns
+                  </NavLink>
+                  <DropdownItem divider />
+                  <NavLink to="/Specialities-page" tag={Link} style={{color:"#333333"}}>
+                    Catering
+                  </NavLink>
+                </DropdownMenu>
+              </UncontrolledDropdown>
 
-              <NavItem>
+              {/* <NavItem>
                 <NavLink
                   href="#pablo"
                   onClick={(e) => {
@@ -140,15 +164,34 @@ function IndexNavbar() {
                 >
                   <p>Halls</p>
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
+
+
               <NavItem>
+                <NavLink
+                  href="#pablo"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document
+                      .getElementById("instance")
+                      .scrollIntoView();
+                  }}
+                >
+                  <p>Get Instance</p>
+                </NavLink>
+              </NavItem>
+
+
+
+             {/*  <NavItem>
                 <NavLink
                   to="/about-page"
                   tag={Link}
                 >
                     <p>Lawns</p>
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
+
               <NavItem>
                 <NavLink
                   to="/career-page"
@@ -211,21 +254,24 @@ function IndexNavbar() {
               }
              
               <NavItem>
-                <NavLink
-                  href="https://twitter.com/CreativeTim?ref=creativetim"
-                  target="_blank"
-                  id="twitter-tooltip"
-                >
-                  <i className="fab fa-twitter"></i>
-                  <p className="d-lg-none d-xl-none">Twitter</p>
-                </NavLink>
-                <UncontrolledTooltip target="#twitter-tooltip">
-                  Follow us on Twitter
-                </UncontrolledTooltip>
-              </NavItem>
+                  <Link to="vendor-page">
+                    <Button
+                      className="nav-link btn-neutral"
+                      id="Vendor"
+                    >
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      {" "}
+                      <p>Join as Vendor</p>
+                    </Button>
+                  </Link>
+                  
+                  <UncontrolledTooltip target="#Vendor">
+                    Join as Vendor
+                  </UncontrolledTooltip>
+                </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://www.facebook.com/CreativeTim?ref=creativetim"
+                  href=""
                   target="_blank"
                   id="facebook-tooltip"
                 >
@@ -238,7 +284,7 @@ function IndexNavbar() {
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+                  href=""
                   target="_blank"
                   id="instagram-tooltip"
                 >

@@ -5,7 +5,7 @@ import { Button, Container } from "reactstrap";
 
 // core components
 
-function SpecialitiesHeader() {
+function SpecialitiesHeader({title, img}) {
   let pageHeader = React.createRef();
 
   React.useEffect(() => {
@@ -27,38 +27,44 @@ function SpecialitiesHeader() {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("assets/img/bg6.jpg") + ")",
+            backgroundImage: "url(" + img && img?img:require("assets/img/bg6.jpg") + ")",
           }}
           ref={pageHeader}
         ></div>
         <div className="content-center">
           <Container>
-            <h1 className="title">This is our great Specialities.</h1>
+            <h1 className="title">{title?title:"This is our great Specialities"}</h1>
             <div className="text-center">
-              <Button
-                className="btn-icon btn-round"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-facebook-square"></i>
-              </Button>
-              <Button
-                className="btn-icon btn-round"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-twitter"></i>
-              </Button>
-              <Button
-                className="btn-icon btn-round"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-google-plus"></i>
-              </Button>
+              {
+               !title? (
+                 <>
+                  <Button
+                    className="btn-icon btn-round"
+                    color="info"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <i className="fab fa-facebook-square"></i>
+                  </Button>
+                  <Button
+                    className="btn-icon btn-round"
+                    color="info"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <i className="fab fa-twitter"></i>
+                  </Button>
+                  <Button
+                    className="btn-icon btn-round"
+                    color="info"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <i className="fab fa-google-plus"></i>
+                  </Button>
+                </>
+              ):""
+              }
             </div>
           </Container>
         </div>

@@ -18,7 +18,7 @@ import axios from "axios";
 import config from "config.js";
 import swal from "sweetalert";
 import OurDoctors from "./index-sections/OurDoctors.js";
-
+import GetInstanceQuote from "Forms/GetInstanceQuote"
 function Index() {
 
   const [Loading, setLoading] = useState(true);
@@ -67,6 +67,7 @@ function Index() {
           {/* <SignUp /> */}
           <Examples />
           <Download />
+          <GetInstanceQuote/>
         </div>
         <DarkFooter />
       </div>

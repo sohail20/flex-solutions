@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
-//Password: DBelIpovw$Lh3tLqLRhz
+//Password: Hhk1kv)fgOqjZtjqGY^x
 
 // styles for this kit
 import "assets/css/bootstrap.min.css";
@@ -22,6 +22,11 @@ import Appointment from "views/examples/Appointment";
 import Specialities from "views/examples/Specialities";
 import CareerPage from "views/examples/CareerPage";
 import config from "config";
+import SearchPage from "views/examples/SearchPage";
+import OurPrivacy from "views/examples/OurPrivacy";
+import Halls from "views/examples/Halls";
+import Lawns from "views/examples/Lawns";
+import Vendor from "views/examples/Vendor";
 
 export const UserData = React.createContext();
 
@@ -86,6 +91,31 @@ function App (){
           path="/career-page"
           render={(props) => <CareerPage {...props} />}
         />
+
+        <Route
+          path="/search-page"
+          render={(props) => <SearchPage {...props} />}
+        />
+
+        <Route
+          path="/privacy-page"
+          render={(props) => <OurPrivacy {...props} />}
+        />
+
+        <Route
+          path="/halls-page"
+          render={(props) => <Halls {...props} />}
+        />
+
+        <Route
+          path="/lawns-page"
+          render={(props) => <Lawns {...props} />}
+        />
+
+        <Route
+          path="/vendor-page"
+          render={(props) => <Vendor {...props} />}
+        />  
         <Redirect from="/" to="/index" />
       </Switch>
     </Switch>

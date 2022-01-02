@@ -16,7 +16,7 @@ function Download() {
         <Container>
           <Row className="justify-content-md-center">
             <Col className="text-center" lg="8" md="12">
-              <h3 className="title">Do you love this shadi Compare?</h3>
+              <h3 className="title">Do you love this Flex Solutions?</h3>
               <h5 className="description">
               We desire to make a platform where we can help people to find Venues in their budget and for owners who want to advertise their Venues with ease.
               </h5>

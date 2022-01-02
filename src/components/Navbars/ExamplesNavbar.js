@@ -149,8 +149,8 @@ function ExamplesNavbar() {
                   target="_blank"
                   id="twitter-tooltip"
                 >
-                  <i className="fab fa-twitter"></i>
-                  <p className="d-lg-none d-xl-none">Twitter</p>
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                  <p className="d-lg-none d-xl-none">Search</p>
                 </NavLink>
                 <UncontrolledTooltip target="#twitter-tooltip">
                   Follow us on Twitter

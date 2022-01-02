@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // reactstrap components
 import { Button, Container, Row, Col } from "reactstrap";
 
@@ -13,19 +14,36 @@ function NucleoIcons() {
             <Col lg="6" md="12">
               <h2 className="title">About Us</h2>
               <h5 className="description">
-              Shadi Compare is a platform where you can advertise your Venue details in reasonable price, you can also show your Venues images, Location, facilities and booking dates.
+                The FLEX Solutions seek to provide ‘A Gateway to ‘Easier Life for All’ through inclusive activities and services. The FLEX SOLUTIONS is originated for easier life with quality of service as it encourages convenient choices, through an inclusive range of core services providing opportunities for all to utilize the time wisely, informed by local social need, with a focus on:
+                <ol>
+                  <li>COMMUNITY:
+                    Providing opportunities to feel valued and be part of a welcoming community
+                  </li>
+                  
+                  <li>
+                  WELL-BEING
+                  Offering 'time value' solutions to encourage smooth flow of time management within budgets.
+                  </li>
 
-               Here you can also find Venues with ease, either it is for hangout or any family event
+                  <li>
+                  LEARNING 
+                  Accessible learning and sign posting for personal and group development
+                  </li>
+                  
+                  <li>
+                  EMPLOYABILITY
+                  Opportunities for developing real skills for real people for today’s marketplace
+                  </li>
+                </ol>
               </h5>
-              <Button
+              <Link
                 className="btn-round mr-1"
                 color="info"
-                href="/nucleo-icons"
+                to="/privacy-page"
                 size="lg"
-                target="_blank"
               >
                 Learn More
-              </Button>
+              </Link>
               <Button
                 className="btn-round"
                 color="info"
