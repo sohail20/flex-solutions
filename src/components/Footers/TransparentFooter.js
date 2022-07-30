@@ -11,41 +11,19 @@ function TransparentFooter() {
         <nav>
           <ul>
             <li>
-              <a
-                href="http://www.thecodeme.com"
-                target="_blank"
-              >
-                thecodeme
-              </a>
+              <a href="/index">Flex Solutions</a>
             </li>
             <li>
-              <a
-                href="http://www.thecodeme.com"
-                target="_blank"
-              >
-                About Us
-              </a>
+              <a href="/index">About Us</a>
             </li>
             <li>
-              <a
-                href="http://www.thecodeme.com"
-                target="_blank"
-              >
-                Blog
-              </a>
+              <a href="#">Blog</a>
             </li>
           </ul>
         </nav>
         <div className="copyright" id="copyright">
-          © {new Date().getFullYear()}, Designed 
-          and Coded by{" "}
-          <a
-            href="http://www.thecodeme.com"
-            target="_blank"
-          >
-            thecodeme
-          </a>
-          .
+          © {new Date().getFullYear()}, Right reserved by{" "}
+          <a href="/index">Flex Solutions</a>.
         </div>
       </Container>
     </footer>

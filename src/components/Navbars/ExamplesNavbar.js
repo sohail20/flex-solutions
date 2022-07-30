@@ -54,22 +54,20 @@ function ExamplesNavbar() {
       <Navbar className={"fixed-top " + navbarColor} color="info" expand="lg">
         <Container>
           <UncontrolledDropdown className="button-dropdown">
-            {
-              isLoggedIn?
+            {isLoggedIn ? (
               <DropdownToggle
-              caret
-              data-toggle="dropdown"
-              href="#pablo"
-              id="navbarDropdown"
-              tag="a"
-              onClick={(e) => e.preventDefault()}
+                caret
+                data-toggle="dropdown"
+                href="#pablo"
+                id="navbarDropdown"
+                tag="a"
+                onClick={(e) => e.preventDefault()}
               >
-              <span className="button-bar"></span>
-              <span className="button-bar"></span>
-              <span className="button-bar"></span>
-            </DropdownToggle>
-            :null
-            }
+                <span className="button-bar"></span>
+                <span className="button-bar"></span>
+                <span className="button-bar"></span>
+              </DropdownToggle>
+            ) : null}
             <DropdownMenu aria-labelledby="navbarDropdown">
               <DropdownItem header tag="a">
                 Dropdown header
@@ -94,10 +92,13 @@ function ExamplesNavbar() {
             </DropdownMenu>
           </UncontrolledDropdown>
           <div className="navbar-translate">
-            
-              <Link id="navbar-brand" to="/index" style={{textDecoration:"none"}}>
-                {TitleName}
-              </Link>
+            <Link
+              id="navbar-brand"
+              to="/index"
+              style={{ textDecoration: "none" }}
+            >
+              {TitleName}
+            </Link>
 
             <UncontrolledTooltip target="#navbar-brand">
               Home Page
@@ -127,29 +128,28 @@ function ExamplesNavbar() {
                   Back to Home
                 </NavLink>
               </NavItem>
-              {
-                location.pathname === "/login-page" || location.pathname === "registeration-page"||location.pathname === "appointment-page"?null:
+              {location.pathname === "/login-page" ||
+              location.pathname === "registeration-page" ||
+              location.pathname === "appointment-page" ? null : (
                 <NavItem>
-                  <NavLink 
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document
-                      .getElementById("issue")
-                      .scrollIntoView();
-                  }}
+                  <NavLink
+                    href="#pablo"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById("issue").scrollIntoView();
+                    }}
                   >
                     Have an issue?
                   </NavLink>
                 </NavItem>
-              }
+              )}
               <NavItem>
                 <NavLink
                   href="https://twitter.com/CreativeTim?ref=creativetim"
                   target="_blank"
                   id="twitter-tooltip"
                 >
-                  <i class="fa fa-search" aria-hidden="true"></i>
+                  <i class="fab fa-twitter" aria-hidden="true"></i>
                   <p className="d-lg-none d-xl-none">Search</p>
                 </NavLink>
                 <UncontrolledTooltip target="#twitter-tooltip">

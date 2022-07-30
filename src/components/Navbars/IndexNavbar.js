@@ -23,7 +23,7 @@ import { TitleName } from "Theme/theme";
 function IndexNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
-  const data = useContext(UserData)
+  const data = useContext(UserData);
   React.useEffect(() => {
     const updateNavbarColor = () => {
       if (
@@ -42,7 +42,7 @@ function IndexNavbar() {
     return function cleanup() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
-  },[]);
+  }, []);
   return (
     <>
       {collapseOpen ? (
@@ -56,27 +56,23 @@ function IndexNavbar() {
       ) : null}
       <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
         <Container>
-        <UncontrolledDropdown className="button-dropdown">
-            {
-              isLoggedIn?
+          <UncontrolledDropdown className="button-dropdown">
+            {isLoggedIn ? (
               <DropdownToggle
-              caret
-              data-toggle="dropdown"
-              href="#pablo"
-              id="navbarDropdown"
-              tag="a"
-              onClick={(e) => e.preventDefault()}
+                caret
+                data-toggle="dropdown"
+                href="#pablo"
+                id="navbarDropdown"
+                tag="a"
+                onClick={(e) => e.preventDefault()}
               >
-              <span className="button-bar"></span>
-              <span className="button-bar"></span>
-              <span className="button-bar"></span>
-            </DropdownToggle>
-            :null
-            }
+                <span className="button-bar"></span>
+                <span className="button-bar"></span>
+                <span className="button-bar"></span>
+              </DropdownToggle>
+            ) : null}
             <DropdownMenu aria-labelledby="navbarDropdown">
-              <DropdownItem header tag="a">
-                
-              </DropdownItem>
+              <DropdownItem header tag="a"></DropdownItem>
               <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                 My Reports
               </DropdownItem>
@@ -94,12 +90,19 @@ function IndexNavbar() {
             </DropdownMenu>
           </UncontrolledDropdown>
           <div className="navbar-translate">
-            <Link id="navbar-brand" style={{textDecoration:"none"}}  to="/index" >
-             {TitleName}
-            </Link>
-            <UncontrolledTooltip target="#navbar-brand">
+            <NavLink
+              id="navbar-brand"
+              href="#pablo"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("instance").scrollIntoView();
+              }}
+            >
+              <p>{TitleName}</p>
+            </NavLink>
+            {/* <UncontrolledTooltip target="#navbar-brand">
               Home Page
-            </UncontrolledTooltip>
+            </UncontrolledTooltip> */}
             <button
               className="navbar-toggler navbar-toggler"
               onClick={() => {
@@ -122,7 +125,11 @@ function IndexNavbar() {
             <Nav navbar>
               <UncontrolledDropdown>
                 <ButtonGroup>
-                  <NavLink to="/Specialities-page" tag={Link} style={{background:"transparent"}} >
+                  <NavLink
+                    to="/Specialities-page"
+                    tag={Link}
+                    style={{ background: "transparent" }}
+                  >
                     Banquets
                   </NavLink>
                   <DropdownToggle
@@ -133,20 +140,39 @@ function IndexNavbar() {
                     color="primary"
                     data-toggle="dropdown"
                     type="button"
-                    style={{background:"transparent", marginTop:-1}}
+                    style={{ background: "transparent", marginTop: -1 }}
                   >
                     <span className="sr-only">Toggle Dropdown</span>
                   </DropdownToggle>
                 </ButtonGroup>
                 <DropdownMenu>
-                  <NavLink to="/halls-page" tag={Link} style={{color:"#333333"}}>
+                  <NavLink
+                    to="/halls-page"
+                    tag={Link}
+                    style={{ color: "#333333" }}
+                  >
                     Halls
                   </NavLink>
-                  <NavLink to="/lawns-page" tag={Link} style={{color:"#333333"}}>
-                   Lawns
+                  <NavLink
+                    to="/lawns-page"
+                    tag={Link}
+                    style={{ color: "#333333" }}
+                  >
+                    Lawns
+                  </NavLink>
+                  <NavLink
+                    to="/terrace-page"
+                    tag={Link}
+                    style={{ color: "#333333" }}
+                  >
+                    Terrace
                   </NavLink>
                   <DropdownItem divider />
-                  <NavLink to="/Specialities-page" tag={Link} style={{color:"#333333"}}>
+                  <NavLink
+                    to="/Specialities-page"
+                    tag={Link}
+                    style={{ color: "#333333" }}
+                  >
                     Catering
                   </NavLink>
                 </DropdownMenu>
@@ -166,24 +192,19 @@ function IndexNavbar() {
                 </NavLink>
               </NavItem> */}
 
-
               <NavItem>
                 <NavLink
                   href="#pablo"
                   onClick={(e) => {
                     e.preventDefault();
-                    document
-                      .getElementById("instance")
-                      .scrollIntoView();
+                    document.getElementById("instance").scrollIntoView();
                   }}
                 >
-                  <p>Get Instance</p>
+                  <p>Contact Us</p>
                 </NavLink>
               </NavItem>
 
-
-
-             {/*  <NavItem>
+              {/*  <NavItem>
                 <NavLink
                   to="/about-page"
                   tag={Link}
@@ -193,15 +214,11 @@ function IndexNavbar() {
               </NavItem> */}
 
               <NavItem>
-                <NavLink
-                  to="/career-page"
-                  tag={Link}
-                >
+                <NavLink to="/career-page" tag={Link}>
                   <p>Event Plan</p>
                 </NavLink>
               </NavItem>
-              {
-                isLoggedIn?
+              {isLoggedIn ? (
                 <UncontrolledDropdown nav>
                   <DropdownToggle
                     caret
@@ -234,7 +251,7 @@ function IndexNavbar() {
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                :
+              ) : (
                 <NavItem>
                   <Link to="login-page">
                     <Button
@@ -246,35 +263,27 @@ function IndexNavbar() {
                       <p>Sign In</p>
                     </Button>
                   </Link>
-                  
+
                   <UncontrolledTooltip target="#upgrade-to-pro">
-                    Sign in now to get everything online 
+                    Sign in now to get everything online
                   </UncontrolledTooltip>
                 </NavItem>
-              }
-             
+              )}
+
               <NavItem>
-                  <Link to="vendor-page">
-                    <Button
-                      className="nav-link btn-neutral"
-                      id="Vendor"
-                    >
-                      <i class="fa fa-plus" aria-hidden="true"></i>
-                      {" "}
-                      <p>Join as Vendor</p>
-                    </Button>
-                  </Link>
-                  
-                  <UncontrolledTooltip target="#Vendor">
-                    Join as Vendor
-                  </UncontrolledTooltip>
-                </NavItem>
+                <Link to="vendor-page">
+                  <Button className="nav-link btn-neutral" id="Vendor">
+                    <i class="fa fa-plus" aria-hidden="true"></i>{" "}
+                    <p>Join as Vendor</p>
+                  </Button>
+                </Link>
+
+                <UncontrolledTooltip target="#Vendor">
+                  Join as Vendor
+                </UncontrolledTooltip>
+              </NavItem>
               <NavItem>
-                <NavLink
-                  href=""
-                  target="_blank"
-                  id="facebook-tooltip"
-                >
+                <NavLink href="" target="_blank" id="facebook-tooltip">
                   <i className="fab fa-facebook-square"></i>
                   <p className="d-lg-none d-xl-none">Facebook</p>
                 </NavLink>
@@ -283,11 +292,7 @@ function IndexNavbar() {
                 </UncontrolledTooltip>
               </NavItem>
               <NavItem>
-                <NavLink
-                  href=""
-                  target="_blank"
-                  id="instagram-tooltip"
-                >
+                <NavLink href="" target="_blank" id="instagram-tooltip">
                   <i className="fab fa-instagram"></i>
                   <p className="d-lg-none d-xl-none">Instagram</p>
                 </NavLink>

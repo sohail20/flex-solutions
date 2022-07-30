@@ -11,45 +11,20 @@ function DarkFooter() {
         <nav>
           <ul>
             <li>
-              <a
-                href="http://www.thecodeme.com"
-                target="_blank"
-              >
-                TheCodeme
-              </a>
+              <a href="/index">Flex Solutions</a>
             </li>
             <li>
-              <a
-                href="http://thecodeme.com"
-                target="_blank"
-              >
-                About Us
-              </a>
+              <a href="/index">About Us</a>
             </li>
             <li>
-              <a
-                href="http://thecodeme.com"
-                target="_blank"
-              >
-                Blog
-              </a>
+              <a href="#">Blog</a>
             </li>
           </ul>
         </nav>
         <div className="copyright" id="copyright">
-          © {new Date().getFullYear()}, Designed by{" "}
-          <a
-            href="https://www.google.com"
-            target="_blank"
-          >
-            Invision
-          </a>
-          . Coded by{" "}
-          <a
-            href="http://www.thecodeme.com"
-            target="_blank"
-          >
-            thecodeme
+          © {new Date().getFullYear()}, Right reserved by{" "}
+          <a href="/index" target="_blank">
+            Flex Solutions
           </a>
           .
         </div>

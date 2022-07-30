@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 //Password: Hhk1kv)fgOqjZtjqGY^x
@@ -30,101 +30,101 @@ import Vendor from "views/examples/Vendor";
 
 export const UserData = React.createContext();
 
-
-
-function App (){
+function App() {
   const [Loading, setLoading] = useState(true);
   const token = localStorage.getItem("hospitalAppToken");
   const [Data, setData] = useState({});
-  useEffect(()=>{
-    if(isLoggedIn){
-      axios.get("user",config).then((response)=>{
-          setData(response.data)
-          setLoading(false)
-      }).catch((err)=>{
+  useEffect(() => {
+    if (isLoggedIn) {
+      axios
+        .get("user", config)
+        .then((response) => {
+          setData(response.data);
+          setLoading(false);
+        })
+        .catch((err) => {
           //swal("Alert!!!",err.message,"warning");
-          setLoading(false)
-      })
-    }else{
-      setLoading(false)
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
     }
-  },[])
+  }, []);
 
-  return Loading?<p>Loading dodo...</p>:(
+  return Loading ? (
+    <p>Loading dodo...</p>
+  ) : (
     <UserData.Provider value={Data}>
-    <HashRouter>
-    <Switch>
-      <Switch>
-        <Route path="/index" render={(props) => <Index {...props} />} />
-        <Route
-          path="/nucleo-icons"
-          render={(props) => <NucleoIcons {...props} />}
-        />
-        <Route
-          path="/about-page"
-          render={(props) => <AboutPage {...props} />}
-        />
-        <Route
-          path="/profile-page"
-          render={(props) => <ProfilePage {...props} />}
-        />
-        <Route
-          path="/login-page"
-          render={(props) => <LoginPage {...props} />}
-        />
-        <Route
-          path="/registeration-page"
-          render={(props) => <Registeration {...props} />}
-        />
+      <HashRouter>
+        <Switch>
+          <Switch>
+            <Route path="/index" render={(props) => <Index {...props} />} />
+            <Route
+              path="/nucleo-icons"
+              render={(props) => <NucleoIcons {...props} />}
+            />
+            <Route
+              path="/about-page"
+              render={(props) => <AboutPage {...props} />}
+            />
+            <Route
+              path="/profile-page"
+              render={(props) => <ProfilePage {...props} />}
+            />
+            <Route
+              path="/login-page"
+              render={(props) => <LoginPage {...props} />}
+            />
+            <Route
+              path="/registeration-page"
+              render={(props) => <Registeration {...props} />}
+            />
 
-        <Route
-          path="/appointment-page"
-          render={(props) => <Appointment {...props} />}
-        />
+            <Route
+              path="/appointment-page"
+              render={(props) => <Appointment {...props} />}
+            />
 
-        <Route
-          path="/Specialities-page"
-          render={(props) => <Specialities {...props} />}
-        />
+            <Route
+              path="/Specialities-page"
+              render={(props) => <Specialities {...props} />}
+            />
 
-        <Route
-          path="/career-page"
-          render={(props) => <CareerPage {...props} />}
-        />
+            <Route
+              path="/career-page"
+              render={(props) => <CareerPage {...props} />}
+            />
 
-        <Route
-          path="/search-page"
-          render={(props) => <SearchPage {...props} />}
-        />
+            <Route
+              path="/search-page"
+              render={(props) => <SearchPage {...props} />}
+            />
 
-        <Route
-          path="/privacy-page"
-          render={(props) => <OurPrivacy {...props} />}
-        />
+            <Route
+              path="/privacy-page"
+              render={(props) => <OurPrivacy {...props} />}
+            />
 
-        <Route
-          path="/halls-page"
-          render={(props) => <Halls {...props} />}
-        />
+            <Route
+              path="/halls-page"
+              render={(props) => <Halls {...props} />}
+            />
 
-        <Route
-          path="/lawns-page"
-          render={(props) => <Lawns {...props} />}
-        />
+            <Route
+              path="/lawns-page"
+              render={(props) => <Lawns {...props} />}
+            />
 
-        <Route
-          path="/vendor-page"
-          render={(props) => <Vendor {...props} />}
-        />  
-        <Redirect from="/" to="/index" />
-      </Switch>
-    </Switch>
-  </HashRouter>
-  </UserData.Provider>
-  )
+            <Route
+              path="/vendor-page"
+              render={(props) => <Vendor {...props} />}
+            />
+            <Redirect from="/" to="/index" />
+          </Switch>
+        </Switch>
+      </HashRouter>
+    </UserData.Provider>
+  );
 }
 
-ReactDOM.render(
-<App/>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));

@@ -5,7 +5,8 @@ import React from "react";
 import { Container } from "reactstrap";
 import { Subtitle } from "Theme/theme";
 import { TitleName } from "Theme/theme";
-import {Sologan} from "Theme/theme"
+import { Sologan } from "Theme/theme";
+import logo from "assets/logo.png";
 // core components
 
 function IndexHeader() {
@@ -37,18 +38,29 @@ function IndexHeader() {
         ></div>
         <Container>
           <div className="content-center brand">
-            <img
-              alt="..."
-              className="n-logo"
-              src={require("assets/logo.png")}
-            ></img>
-            <h1 className="h1-seo" style={{fontWeight:"bold",fontFamily: 'lucida grande'}}>{TitleName}</h1>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+              }}
+            >
+              <img alt="..." className="n-logo" src={logo}></img>
+              <h1
+                className="h1-seo"
+                style={{
+                  marginTop: "15px",
+                  fontWeight: "bold",
+                  fontFamily: "lucida grande",
+                }}
+              >
+                Solutions
+              </h1>
+            </div>
             <h3>{Sologan}</h3>
           </div>
           <h6 className="category category-absolute">
-            {
-              Subtitle
-            }
+            {Subtitle}
             {/* Designed by{" "}
             <a href="http://invisionapp.com/?ref=creativetim" target="_blank">
               <img

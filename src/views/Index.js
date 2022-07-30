@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 
 // reactstrap components
 // import {
@@ -18,23 +18,22 @@ import axios from "axios";
 import config from "config.js";
 import swal from "sweetalert";
 import OurDoctors from "./index-sections/OurDoctors.js";
-import GetInstanceQuote from "Forms/GetInstanceQuote"
+import GetInstanceQuote from "Forms/GetInstanceQuote";
 function Index() {
-
   const [Loading, setLoading] = useState(true);
   const [DocData, setDocData] = useState([]);
 
   React.useEffect(() => {
-    
-    axios.get("doctors",config)
-    .then((res)=>{
-      setDocData(res.data.doctors)
-      setLoading(false)
-    })
-    .catch((err)=>{
-      //swal("Alert!",err.message,"warning")
-      setLoading(false)
-    })
+    axios
+      .get("doctors", config)
+      .then((res) => {
+        setDocData(res.data.doctors);
+        setLoading(false);
+      })
+      .catch((err) => {
+        //swal("Alert!",err.message,"warning")
+        setLoading(false);
+      });
 
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -45,8 +44,10 @@ function Index() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  },[]);
-  return Loading?<p>Loading...</p>:(
+  }, []);
+  return Loading ? (
+    <p>Loading...</p>
+  ) : (
     <>
       <IndexNavbar />
       <div className="wrapper">
@@ -62,12 +63,15 @@ function Index() {
           <Javascript /> */}
           <Carousel />
           <NucleoIcons />
-          <OurDoctors data={DocData}/>
+          {/* <OurDoctors /> */}
+          <OurDoctors title="Lawns" />
+          <OurDoctors title="Halls" />
+          <OurDoctors title="Banquets" />
           <CompleteExamples />
           {/* <SignUp /> */}
           <Examples />
           <Download />
-          <GetInstanceQuote/>
+          <GetInstanceQuote />
         </div>
         <DarkFooter />
       </div>
