@@ -1,9 +1,5 @@
-const token = localStorage.getItem("hospitalAppToken")
+const token = localStorage.getItem("token");
 const config = {
-    headers:{
-        Authorization:"Bearer "+token,
-        Accept:"application/json",
-        Content:"application/json",
-    }
-}
+  "x-auth-token": token,
+};
 export default config;

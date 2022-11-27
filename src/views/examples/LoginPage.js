@@ -23,26 +23,23 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import Issue from "views/index-sections/Issue";
+import { useDispatch, useSelector } from "react-redux";
+import { authenticateUser } from "store/auth";
 
 function LoginPage() {
+  const dispatch = useDispatch()
   const [firstFocus, setFirstFocus] = useState(false);
   const [lastFocus, setLastFocus] = useState(false);
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const history = useHistory()
+  const token = useSelector(state=>state.entities.auth)
   const validation = ()=>{
     if(Email&&Password){
-        axios.post("login",{
-          email:Email,
-          password:Password
-        }).then((res)=>{
-            if(res.data.user){
-              localStorage.setItem("hospitalAppToken",res.data.token)
-              history.push("/index");
-            }
-        }).catch((err)=>{
-            swal("Alert!",err.message,"warning")
-        })
+      dispatch(authenticateUser({
+        email:Email,
+        password:Password
+      }))
     }
   }
 

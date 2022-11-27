@@ -3,6 +3,7 @@ import config from "config";
 import { isLoggedIn } from "Functions/IsloggedIn";
 import { UserData } from "index";
 import React, { useState, useContext } from "react";
+import { useDispatch } from "react-redux";
 // reactstrap components
 import {
   Button,
@@ -14,8 +15,10 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { addvenue } from "store/venues";
 import swal from "sweetalert";
 function GetInstanceQuote(props) {
+  const dispatch = useDispatch()
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   const data = useContext(UserData);
@@ -25,28 +28,8 @@ function GetInstanceQuote(props) {
   const [Message, setMessage] = useState("");
 
   const validate = () => {
-    console.log({
-      user_id: data.id,
-      name: Name,
-      email: Email,
-      message: Message,
-    });
     if (Message) {
-      axios
-        .post(
-          "issue",
-          {
-            user_id: data.id,
-            name: Name,
-            email: Email,
-            message: Message,
-          },
-          config
-        )
-        .then((res) => {})
-        .catch((err) => {
-          swal("Alert!", err.message, "warning");
-        });
+      dispatch(addvenue({name:"hello"}))
     } else swal("Alert!", "Please write some message.", "warning");
   };
   return (

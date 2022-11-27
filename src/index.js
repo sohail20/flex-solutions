@@ -17,7 +17,9 @@ import ProfilePage from "views/examples/ProfilePage.js";
 import Registeration from "views/Registeration/Registeration";
 import { isLoggedIn } from "Functions/IsloggedIn";
 import axios from "axios";
+import {useDispatch,useSelector} from "react-redux"
 import swal from "sweetalert";
+import { Provider } from "react-redux";
 import Appointment from "views/examples/Appointment";
 import Specialities from "views/examples/Specialities";
 import CareerPage from "views/examples/CareerPage";
@@ -27,34 +29,43 @@ import OurPrivacy from "views/examples/OurPrivacy";
 import Halls from "views/examples/Halls";
 import Lawns from "views/examples/Lawns";
 import Vendor from "views/examples/Vendor";
-
+import { loadvenues } from "store/venues";
+import configureStore from "./store/configureStore";
+import { getVenues } from "store/venues";
 export const UserData = React.createContext();
 
+const store = configureStore()
+
+// store.dispatch({
+//   type:"api/callBegan",
+//   payload:{
+//     url:"/halls",
+//     onStart:"venuesRequested",
+//     onSuccess:"venuesReceived",
+//     onError:"venuesRequestFailed"
+//   }
+// })
 function App() {
   const [Loading, setLoading] = useState(true);
   const token = localStorage.getItem("hospitalAppToken");
   const [Data, setData] = useState({});
+  const dispatch = useDispatch()
+  const venues = useSelector(getVenues);  
+
   useEffect(() => {
-    if (isLoggedIn) {
-      axios
-        .get("user", config)
-        .then((response) => {
-          setData(response.data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          //swal("Alert!!!",err.message,"warning");
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
+    dispatch(loadvenues()) 
+    if(venues)
+     setLoading(false)
+    
   }, []);
 
   return Loading ? (
     <p>Loading dodo...</p>
   ) : (
     <UserData.Provider value={Data}>
+      {
+        JSON.stringify(venues)
+      }
       <HashRouter>
         <Switch>
           <Switch>
@@ -119,12 +130,13 @@ function App() {
               path="/vendor-page"
               render={(props) => <Vendor {...props} />}
             />
-            <Redirect from="/" to="/index" />
+            <Redirect from="/" to="/login-page" />
           </Switch>
         </Switch>
       </HashRouter>
     </UserData.Provider>
+    
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById("root"));

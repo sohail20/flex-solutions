@@ -242,7 +242,7 @@ function IndexNavbar() {
                     <DropdownItem
                       target="_blank"
                       onClick={() => {
-                        localStorage.removeItem("hospitalAppToken");
+                        localStorage.removeItem("token");
                         window.location.reload();
                       }}
                     >

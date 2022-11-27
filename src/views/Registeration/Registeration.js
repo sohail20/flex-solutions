@@ -22,8 +22,11 @@ import TransparentFooter from "components/Footers/TransparentFooter.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import { useDispatch } from "react-redux";
+import { registerUser } from "store/users";
 
 function Registeration() {
+  const dispatch = useDispatch()
   const [firstFocus, setFirstFocus] = useState(false);
   const [lastFocus, setLastFocus] = useState(false);
   const [FullName, setFullName] = useState("");
@@ -33,17 +36,11 @@ function Registeration() {
   
   const validation = ()=>{
     if(FullName&&Email&&Password&&ConPassword){
-      axios.post("register",{
+      dispatch(registerUser({
         name:FullName,
         email:Email,
-        password:Password,
-        password_confirmation:ConPassword
-      }).then((res)=>{
-        swal("Congrats","You registered successfully","success");
-      })
-      .catch((err)=>{
-          swal("Alert!",err.message,"warning")
-      })
+        password:ConPassword
+      }))
     }
   }
   React.useEffect(() => {
