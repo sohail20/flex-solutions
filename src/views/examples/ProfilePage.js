@@ -44,13 +44,6 @@ function ProfilePage() {
   }
 
   useEffect(() => {
-    axios.get("appointment",config)
-    .then((res)=>{
-      setData(res.data.app)
-    })
-    .catch((err)=>{
-      swal("Alert!",err.message,"warning")
-    })
     pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");

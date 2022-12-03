@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 
 // reactstrap components
 import {
@@ -20,29 +20,25 @@ import {
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "components/Footers/TransparentFooter.js";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import swal from "sweetalert";
-import { useDispatch } from "react-redux";
-import { registerUser } from "store/users";
+import { useSignupMutation } from "api/authenticate";
 
 function Registeration() {
-  const dispatch = useDispatch()
   const [firstFocus, setFirstFocus] = useState(false);
   const [lastFocus, setLastFocus] = useState(false);
   const [FullName, setFullName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [ConPassword, setConPassword] = useState("");
-  
-  const validation = ()=>{
-    if(FullName&&Email&&Password&&ConPassword){
-      dispatch(registerUser({
-        name:FullName,
-        email:Email,
-        password:ConPassword
-      }))
+  const [signUp, { isLoading }] = useSignupMutation();
+  const validation = () => {
+    if (FullName && Email && Password && ConPassword) {
+      signUp({
+        name: FullName,
+        email: Email,
+        password: ConPassword,
+      });
     }
-  }
+  };
   React.useEffect(() => {
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
@@ -94,8 +90,8 @@ function Registeration() {
                         type="text"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
-                        onChange = {(val)=>{
-                            setFullName(val.target.value)
+                        onChange={(val) => {
+                          setFullName(val.target.value);
                         }}
                       ></Input>
                     </InputGroup>
@@ -115,8 +111,8 @@ function Registeration() {
                         type="email"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
-                        onChange = {(val)=>{
-                            setEmail(val.target.value)
+                        onChange={(val) => {
+                          setEmail(val.target.value);
                         }}
                       ></Input>
                     </InputGroup>
@@ -136,8 +132,8 @@ function Registeration() {
                         type="password"
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
-                        onChange = {(val)=>{
-                            setPassword(val.target.value)
+                        onChange={(val) => {
+                          setPassword(val.target.value);
                         }}
                       ></Input>
                     </InputGroup>
@@ -157,8 +153,8 @@ function Registeration() {
                         type="password"
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
-                        onChange = {(val)=>{
-                            setConPassword(val.target.value)
+                        onChange={(val) => {
+                          setConPassword(val.target.value);
                         }}
                       ></Input>
                     </InputGroup>
@@ -175,13 +171,13 @@ function Registeration() {
                     </Button>
                     <div className="pull-left">
                       <h6>
-                        <Link to="/login-page" className="link">                       
+                        <Link to="/login-page" className="link">
                           Sign in
                         </Link>
                       </h6>
                     </div>
                     <div className="pull-right">
-                     <a href="#lj" className="link"> 
+                      <a href="#lj" className="link">
                         <h6>Need Help? </h6>
                       </a>
                     </div>

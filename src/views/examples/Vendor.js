@@ -18,8 +18,19 @@ import LandingPageHeader from "components/Headers/LandingPageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
 import Issue from "views/index-sections/Issue";
 import SpecialitiesHeader from "components/Headers/SpecialitiesHeader";
+import { useMakeRequestForVendorMutation } from "api/makeRequestForVendor";
+import swal from "sweetalert";
+import { useGetUpdatedUserQuery } from "api/authenticate";
 
 function Vendor() {
+  const [dataObj, setDataObj] = React.useState({});
+
+  const [makeRequestForVendor, { isLoading }] =
+    useMakeRequestForVendorMutation();
+
+  const {data:userData}= useGetUpdatedUserQuery()
+
+  console.log("userData",userData)
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
@@ -31,6 +42,16 @@ function Vendor() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
+
+  const handleSubmit = () => {
+    const { _id } = JSON.parse(localStorage.getItem("user"));
+    makeRequestForVendor({ ...dataObj, userId: _id }).then((res) => {
+      if (res.error) {
+        return swal("Alert!", res.error.data, "warning");
+      }
+      swal("Success", "We will contact you soon!", "success");
+    });
+  };
   return (
     <>
       <ExamplesNavbar />
@@ -50,12 +71,26 @@ function Vendor() {
                 <InputGroup
                   className={"input-lg" + (true ? " input-group-focus" : "")}
                 >
-                  <Input placeholder="Full Name" type="text"></Input>
+                  <Input
+                    placeholder="Full Name"
+                    type="text"
+                    value={dataObj.name}
+                    onChange={(e) => {
+                      setDataObj({ ...dataObj, name: e.target.value });
+                    }}
+                  ></Input>
                 </InputGroup>
                 <InputGroup
                   className={"input-lg" + (true ? " input-group-focus" : "")}
                 >
-                  <Input placeholder="Designation" type="text"></Input>
+                  <Input
+                    placeholder="Designation"
+                    type="text"
+                    value={dataObj.designation}
+                    onChange={(e) => {
+                      setDataObj({ ...dataObj, designation: e.target.value });
+                    }}
+                  ></Input>
                 </InputGroup>
               </Col>
 
@@ -63,12 +98,24 @@ function Vendor() {
                 <InputGroup
                   className={"input-lg" + (true ? " input-group-focus" : "")}
                 >
-                  <Input placeholder="Email Address" type="email"></Input>
+                  <Input
+                    placeholder="Email Address"
+                    type="email"
+                    onChange={(e) => {
+                      setDataObj({ ...dataObj, address: e.target.value });
+                    }}
+                  ></Input>
                 </InputGroup>
                 <InputGroup
                   className={"input-lg" + (true ? " input-group-focus" : "")}
                 >
-                  <Input placeholder="Mobile Number" type="number"></Input>
+                  <Input
+                    placeholder="Mobile Number"
+                    onChange={(e) => {
+                      setDataObj({ ...dataObj, phone: e.target.value });
+                    }}
+                    type="number"
+                  ></Input>
                 </InputGroup>
               </Col>
 
@@ -79,7 +126,13 @@ function Vendor() {
                 <InputGroup
                   className={"input-lg" + (true ? " input-group-focus" : "")}
                 >
-                  <Input placeholder="Venue Name" type="text"></Input>
+                  <Input
+                    placeholder="Venue Name"
+                    type="text"
+                    onChange={(e) => {
+                      setDataObj({ ...dataObj, venueName: e.target.value });
+                    }}
+                  ></Input>
                 </InputGroup>
                 <InputGroup
                   className={"input-lg" + (true ? " input-group-focus" : "")}
@@ -90,6 +143,9 @@ function Vendor() {
                       borderRadius: 30,
                       padding: 13,
                       opacity: 0.5,
+                    }}
+                    onChange={(e) => {
+                      setDataObj({ ...dataObj, venueType: e.target.value });
                     }}
                   >
                     <option>-Type-</option>
@@ -111,6 +167,9 @@ function Vendor() {
                       padding: 13,
                       opacity: 0.5,
                     }}
+                    onChange={(e) => {
+                      setDataObj({ ...dataObj, location: e.target.value });
+                    }}
                   >
                     <option>-Location-</option>
                     <option>Karachi</option>
@@ -127,6 +186,9 @@ function Vendor() {
                       borderRadius: 30,
                       padding: 13,
                       opacity: 0.5,
+                    }}
+                    onChange={(e) => {
+                      setDataObj({ ...dataObj, sitting: e.target.value });
                     }}
                   >
                     <option>-Persons-</option>
@@ -146,6 +208,9 @@ function Vendor() {
                       borderRadius: 30,
                       padding: 13,
                       opacity: 0.5,
+                    }}
+                    onChange={(e) => {
+                      setDataObj({ ...dataObj, ratePerPerson: e.target.value });
                     }}
                   >
                     <option>-Rate per person-</option>
@@ -219,8 +284,10 @@ function Vendor() {
                     color="info"
                     href="#pablo"
                     size="lg"
+                    loa
+                    onClick={handleSubmit}
                   >
-                    Search
+                    {isLoading ? "Loading..." : "Submit"}
                   </Button>
                 </div>
               </Col>

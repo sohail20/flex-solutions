@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 
 // reactstrap components
 import {
@@ -24,24 +24,24 @@ import axios from "axios";
 import swal from "sweetalert";
 import Issue from "views/index-sections/Issue";
 import { useDispatch, useSelector } from "react-redux";
-import { authenticateUser } from "store/auth";
+import { useLoginMutation } from "api/authenticate";
 
 function LoginPage() {
-  const dispatch = useDispatch()
   const [firstFocus, setFirstFocus] = useState(false);
   const [lastFocus, setLastFocus] = useState(false);
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const history = useHistory()
-  const token = useSelector(state=>state.entities.auth)
-  const validation = ()=>{
-    if(Email&&Password){
-      dispatch(authenticateUser({
-        email:Email,
-        password:Password
-      }))
+  const history = useHistory();
+  const [login, { isLoading }] = useLoginMutation();
+
+  const validation = () => {
+    if (Email && Password) {
+      login({ email: Email, password: Password }).then((res) => {
+        const token = localStorage.getItem("token");
+        if (token) history.push("/index");
+      });
     }
-  }
+  };
 
   React.useEffect(() => {
     document.body.classList.add("login-page");
@@ -94,8 +94,8 @@ function LoginPage() {
                         type="email"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
-                        onChange = {(val)=>{
-                          setEmail(val.target.value)
+                        onChange={(val) => {
+                          setEmail(val.target.value);
                         }}
                       ></Input>
                     </InputGroup>
@@ -115,8 +115,8 @@ function LoginPage() {
                         type="password"
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
-                        onChange = {(val)=>{
-                          setPassword(val.target.value)
+                        onChange={(val) => {
+                          setPassword(val.target.value);
                         }}
                       ></Input>
                     </InputGroup>
@@ -153,7 +153,6 @@ function LoginPage() {
                 </Form>
               </Card>
             </Col>
-            
           </Container>
         </div>
         <TransparentFooter />

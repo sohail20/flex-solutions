@@ -24,6 +24,7 @@ function IndexNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const data = useContext(UserData);
+  
   React.useEffect(() => {
     const updateNavbarColor = () => {
       if (

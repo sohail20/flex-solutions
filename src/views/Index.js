@@ -24,17 +24,7 @@ function Index() {
   const [DocData, setDocData] = useState([]);
 
   React.useEffect(() => {
-    axios
-      .get("doctors", config)
-      .then((res) => {
-        setDocData(res.data.doctors);
-        setLoading(false);
-      })
-      .catch((err) => {
-        //swal("Alert!",err.message,"warning")
-        setLoading(false);
-      });
-
+    setLoading(false)
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");

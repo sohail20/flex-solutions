@@ -8,8 +8,8 @@ import { Container } from "reactstrap";
 
 function ProfilePageHeader(props) {
   let pageHeader = React.createRef();
-  const AppoinmentList = props.data
-  const data = useContext(UserData)
+  const AppoinmentList = props.data;
+  const data = useContext(UserData);
 
   React.useEffect(() => {
     if (window.innerWidth > 991) {
@@ -24,7 +24,7 @@ function ProfilePageHeader(props) {
       };
     }
   });
-  
+
   return (
     <>
       <div
@@ -43,7 +43,7 @@ function ProfilePageHeader(props) {
             <img alt="..." src={require("assets/img/ProfileAvatar.png")}></img>
           </div>
           <h3 className="title">{data.name}</h3>
-          <p className="category">Photographer</p>
+          <p className="category" style={{textTransform:"none"}}>{data.email}</p>
           <div className="content">
             <div className="social-description">
               <h2>0</h2>

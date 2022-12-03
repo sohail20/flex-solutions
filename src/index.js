@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 //Password: Hhk1kv)fgOqjZtjqGY^x
 
 // styles for this kit
@@ -17,7 +17,7 @@ import ProfilePage from "views/examples/ProfilePage.js";
 import Registeration from "views/Registeration/Registeration";
 import { isLoggedIn } from "Functions/IsloggedIn";
 import axios from "axios";
-import {useDispatch,useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import { Provider } from "react-redux";
 import Appointment from "views/examples/Appointment";
@@ -29,12 +29,10 @@ import OurPrivacy from "views/examples/OurPrivacy";
 import Halls from "views/examples/Halls";
 import Lawns from "views/examples/Lawns";
 import Vendor from "views/examples/Vendor";
-import { loadvenues } from "store/venues";
 import configureStore from "./store/configureStore";
-import { getVenues } from "store/venues";
 export const UserData = React.createContext();
 
-const store = configureStore()
+const store = configureStore();
 
 // store.dispatch({
 //   type:"api/callBegan",
@@ -46,27 +44,21 @@ const store = configureStore()
 //   }
 // })
 function App() {
-  const [Loading, setLoading] = useState(true);
-  const token = localStorage.getItem("hospitalAppToken");
+  const [Loading, setLoading] = useState(false);
   const [Data, setData] = useState({});
-  const dispatch = useDispatch()
-  const venues = useSelector(getVenues);  
-
   useEffect(() => {
-    dispatch(loadvenues()) 
-    if(venues)
-     setLoading(false)
-    
+    const userData = JSON.parse(localStorage.getItem("user"));
+    if (userData) {
+      setData(userData);
+      setLoading(false);
+    }
   }, []);
 
   return Loading ? (
     <p>Loading dodo...</p>
   ) : (
     <UserData.Provider value={Data}>
-      {
-        JSON.stringify(venues)
-      }
-      <HashRouter>
+      <BrowserRouter>
         <Switch>
           <Switch>
             <Route path="/index" render={(props) => <Index {...props} />} />
@@ -130,13 +122,17 @@ function App() {
               path="/vendor-page"
               render={(props) => <Vendor {...props} />}
             />
-            <Redirect from="/" to="/login-page" />
+            <Redirect from="/" to={"/login-page"} />
           </Switch>
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     </UserData.Provider>
-    
   );
 }
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById("root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);

@@ -15,7 +15,6 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { addvenue } from "store/venues";
 import swal from "sweetalert";
 function GetInstanceQuote(props) {
   const dispatch = useDispatch()
@@ -29,7 +28,7 @@ function GetInstanceQuote(props) {
 
   const validate = () => {
     if (Message) {
-      dispatch(addvenue({name:"hello"}))
+      //dispatch(addvenue({name:"hello"}))
     } else swal("Alert!", "Please write some message.", "warning");
   };
   return (
