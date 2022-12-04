@@ -14,6 +14,7 @@ import {
   InputGroup,
   Container,
   Col,
+  Spinner,
 } from "reactstrap";
 
 // core components
@@ -21,6 +22,7 @@ import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "components/Footers/TransparentFooter.js";
 import { Link } from "react-router-dom";
 import { useSignupMutation } from "api/authenticate";
+import swal from "sweetalert";
 
 function Registeration() {
   const [firstFocus, setFirstFocus] = useState(false);
@@ -31,13 +33,16 @@ function Registeration() {
   const [ConPassword, setConPassword] = useState("");
   const [signUp, { isLoading }] = useSignupMutation();
   const validation = () => {
-    if (FullName && Email && Password && ConPassword) {
-      signUp({
-        name: FullName,
-        email: Email,
-        password: ConPassword,
-      });
-    }
+    //if (FullName && Email && Password && ConPassword) {
+    signUp({
+      name: FullName,
+      email: Email,
+      password: ConPassword,
+    }).then((res) => {
+      if (res.error) return swal("Failed!", res.error.data, "warning");
+      swal("Success!", res.error.data, "success");
+    });
+    //}
   };
   React.useEffect(() => {
     document.body.classList.add("login-page");
@@ -166,8 +171,19 @@ function Registeration() {
                       color="info"
                       onClick={validation}
                       size="lg"
+                      disabled={isLoading}
                     >
-                      Register
+                      {isLoading ? (
+                        <>
+                        <Spinner
+                          style={{ width: "18px", height: "18px" }}
+                          type="grow"
+                          color="light"
+                        />
+                        </>
+                      ) : (
+                        "Register"
+                      )}
                     </Button>
                     <div className="pull-left">
                       <h6>

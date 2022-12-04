@@ -7,9 +7,8 @@ import {
   Row,
   Col,
   Input,
-  InputGroupAddon,
-  InputGroupText,
   InputGroup,
+  Spinner,
 } from "reactstrap";
 
 // core components
@@ -28,9 +27,8 @@ function Vendor() {
   const [makeRequestForVendor, { isLoading }] =
     useMakeRequestForVendorMutation();
 
-  const {data:userData}= useGetUpdatedUserQuery()
+  const { data: userData } = useGetUpdatedUserQuery();
 
-  console.log("userData",userData)
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
@@ -287,7 +285,15 @@ function Vendor() {
                     loa
                     onClick={handleSubmit}
                   >
-                    {isLoading ? "Loading..." : "Submit"}
+                    {isLoading ? (
+                      <Spinner
+                        style={{ width: "18px", height: "18px" }}
+                        type="grow"
+                        color="light"
+                      />
+                    ) : (
+                      "Submit"
+                    )}
                   </Button>
                 </div>
               </Col>

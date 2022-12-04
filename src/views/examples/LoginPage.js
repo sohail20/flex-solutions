@@ -14,16 +14,14 @@ import {
   InputGroup,
   Container,
   Col,
+  Spinner,
 } from "reactstrap";
 
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "components/Footers/TransparentFooter.js";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
 import swal from "sweetalert";
-import Issue from "views/index-sections/Issue";
-import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "api/authenticate";
 
 function LoginPage() {
@@ -37,6 +35,8 @@ function LoginPage() {
   const validation = () => {
     if (Email && Password) {
       login({ email: Email, password: Password }).then((res) => {
+        if (res.error) swal("Failed", res.error.data, "warning");
+
         const token = localStorage.getItem("token");
         if (token) history.push("/index");
       });
@@ -129,7 +129,15 @@ function LoginPage() {
                       onClick={validation}
                       size="lg"
                     >
-                      Get Started
+                      {isLoading ? (
+                        <Spinner
+                          style={{ width: "18px", height: "18px" }}
+                          type=""
+                          color="light"
+                        />
+                      ) : (
+                        "Get Started"
+                      )}
                     </Button>
                     <div className="pull-left">
                       <h6>
